@@ -37,6 +37,15 @@ public final class Provider: Vapor.Provider {
         self.driver = driver
         self.database = Database(driver)
     }
+    
+    public init(database: String, uri: String) throws {
+        
+        let driver = try MongoDriver(database: database, uri: uri)
+        
+        self.driver = driver
+        self.database = Database(driver)
+        
+    }
 
     public convenience init(config: Config) throws {
         guard let mongo = config["mongo"]?.object else {
